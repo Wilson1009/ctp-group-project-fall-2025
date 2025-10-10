@@ -11,9 +11,9 @@ function HomePage() {
             </div>
         </div>
 
-        <div className='text-center mt-10'>
-            <h2 className='text-3xl mb-5'>Welcome to your dashboard</h2>
-            <p className='text-lg text-gray-600'>Here you can manage your profile, view your activities, and customize your settings.</p>
+        <div className='text-center mt-25 space-x-10'>
+          <button className='bg-[rgb(188,138,82)] text-black p-2 rounded-lg' >Student Login</button>
+          <button className='bg-[rgb(157,98,70)] text-white p-2 rounded-lg'>Professor Login</button>
         </div>
         
         </>
