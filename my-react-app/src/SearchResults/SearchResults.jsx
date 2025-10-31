@@ -18,7 +18,6 @@ function SearchResults() {
         });
     });
 
-
     const professorReviews = data.flatMap(user =>
         user.reviews.filter(review => review.professorName === professorName)
     );
@@ -39,10 +38,10 @@ function SearchResults() {
     return (
         <>
             <div className="bg-[rgb(141,89,29)] p-4 text-white">temp nav bar</div>
-            <div className="bg-[rgb(224,202,148)] flex w-[90vw] h-[70vh] items-center mx-auto mt-25 space-x-10 rounded-xl">
+            <div className="bg-[rgb(224,202,148)] flex w-[90vw] h-[70vh] items-center mx-auto mt-20 space-x-10 rounded-xl">
                 <div className="w-[100vh] relative flex justify-center items-center">
                     <img
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[90%] h-auto"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[90%] h-auto max-w-full"
                         src={ProfileFrame}
                         alt="Profile Frame"
                     />
@@ -53,29 +52,30 @@ function SearchResults() {
                     />
                 </div>
 
-                <div className=" w-[80vh] h-[50vh]">
+                <div className="max-w-[80vh] max-h-[70vh] flex flex-col items-center">
                     <img
-                        className="w-full h-auto"
+                        className="max-w-[75vh] h-auto"
                         src={BannerRed}
                         alt="Banner"
                     />
+                    <h1 className="font-bold mt-4 mb-2 absolute text-[min(5vw,35px)]">{professorName}</h1>
+
                     {/* Star Rating */}
                     <div className=" w-[40vh]">
                         {/* Star Rating Display Area */}
-                        <div className="p-4 flex flex-col items-center justify-center">
+                        <div className="p-4 flex flex-col items-center justify-center mb-7">
 
                             {/* Average Star Rating */}
-                            <h3 className="text-4xl font-extrabold text-gray-800">
-                                {averageStarRating} / 5.0
-                            </h3>
-
-                            <div className="text-3xl text-yellow-500 my-2">
+                            <div className="text-1xl text-yellow-500">
                                 {'⭐'.repeat(Math.floor(averageStarRating))}
                                 {'☆'.repeat(5 - Math.floor(averageStarRating))}
                             </div>
+                            <h3 className="text-1xl font-bold text-gray-800">
+                                {averageStarRating} / 5.0
+                            </h3>
 
                             {/* Total Rating Count */}
-                            <p className="text-sm text-gray-600">
+                            <p className="text-xs text-gray-600">
                                 Based on {totalRatingsCount} reviews
                             </p>
 
@@ -83,24 +83,25 @@ function SearchResults() {
 
                         {/* ... Courses Taught section follows ... */}
                     </div>
+                    <div className="border-2 border-black p-4 shadow-xl">
+                        <h3 className="font-black">Courses Taught:</h3>
+                        <div className=" flex flex-wrap p-4 space-x-4 overflow-y-scroll h-[20vh]">
+                            {/* Convert the Set to an array for mapping in JSX */}
+                            {[...distinctCourseNames].map((courseName) => (
+                                <div key={courseName} className="w-[calc(33.333%-1rem)] mb-4">
+                                    <CoursesTaughtComponent
+                                        courseName={courseName}
+                                    />
+                                </div>
+                            ))}
+                        </div>
 
-                    <h3 className="font-black">Courses Taught:</h3>
-                    <div className=" flex flex-wrap p-4 space-x-4 overflow-y-scroll h-[20vh]">
-                        {/* Convert the Set to an array for mapping in JSX */}
-                        {[...distinctCourseNames].map((courseName) => (
-                            <div key={courseName} className="w-[calc(33.333%-1rem)] mb-4">
-                                <CoursesTaughtComponent
-                                    courseName={courseName}
-                                />
-                            </div>
-                        ))}
                     </div>
-
                 </div>
 
-                <div className="w-[80vh] h-[50vh] border-2 border-black mx-auto shadow-xl overflow-hidden">
-                    <h2 className="text-[35px] font-bold p-4">Ratings & Reviews</h2>
-                    <div className="overflow-y-auto h-[40vh] p-4">
+                <div className="w-[100vh] h-[55vh] border-2 border-black shadow-xl overflow-hidden mr-7">
+                    <h2 className="text-[30px] font-bold p-4 text-sm md:text-base lg:text-lg xl:text-xl">Ratings & Reviews</h2>
+                    <div className="overflow-y-auto h-[45vh] p-4">
                         {data.map((user, uIndex) => (
                             user.reviews.map((review, rIndex) => (
                                 <Reviews

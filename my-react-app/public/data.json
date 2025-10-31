@@ -6,7 +6,7 @@
                 "id": 1,
                 "professorName": "Dr. John Smith",
                 "courseName": "Introduction to Computer Science",
-                "rating": 4.5,
+                "rating": 1.0,
                 "comment": "Great professor! Explained concepts clearly and was always available for questions.",
                 "date": "2023-10-15"
             },
