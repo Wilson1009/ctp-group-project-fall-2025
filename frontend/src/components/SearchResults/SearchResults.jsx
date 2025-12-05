@@ -1,9 +1,9 @@
-import ProfileFrame from "../assets/ProfileFrame.png";
-import Temp from "../assets/Temp.png";
-import Reviews from "./Reviews";
+//import ProfileFrame from "../assets/ProfileFrame.png";
+//import Temp from "../assets/Temp.png";
+//import Reviews from "./Reviews";
 //import data from "../../public/data.json"
-import BannerRed from "../assets/BannerRed.png"
-import CoursesTaughtComponent from "./CoursesTaughtComponent";
+//import BannerRed from "../assets/BannerRed.png"
+//import CoursesTaughtComponent from "./CoursesTaughtComponent";
 
 function SearchResults() {
     //Temp data

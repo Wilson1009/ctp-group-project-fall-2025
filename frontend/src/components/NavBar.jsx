@@ -1,18 +1,18 @@
 //import NavbarBg from '../assets/rectangle.png';
 //import Logo from '../assets/Logo.png';
 
-function Navbar({ onNavigate }) {
+function Navbar({ onNavigate, onLogout }) {
     return (
         <nav className="relative h-20">
             <img 
-                src={NavbarBg} 
+             
                 alt="Navbar background" 
                 className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="relative container mx-auto h-full flex justify-between items-center px-1">
                 <div className="flex items-center">
                     <img 
-                        src={Logo} 
+                        
                         alt="Logo" 
                         className="h-40 w-40 mt-18"
                     />
@@ -48,6 +48,12 @@ function Navbar({ onNavigate }) {
                             className="text-white hover:text-[rgb(188,138,82)] transition-colors font-semibold"
                         >
                             Progress
+                        </button>
+                    </li>
+
+                    <li>
+                        <button onClick={onLogout} className="...your styles...">
+                        Sign Out
                         </button>
                     </li>
                 </ul>
