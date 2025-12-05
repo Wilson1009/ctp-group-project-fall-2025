@@ -3,8 +3,7 @@ const router = express.Router()
 
 const { db } = require('../db/db')
 const { reviews, professorRating } = require('../db/schema')
-const { eq } = require('drizzle-orm/expressions')
-const { sql } = require('drizzle-orm')
+const { eq, sql } = require('drizzle-orm')
 
 router.get('/', async (req, res) => {
     try{
@@ -29,8 +28,12 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try{
         const { instructor, userId, rating, comment } = req.body;
-        if (!professorId || !userId || !rating) {
+        if (!instructor || !userId || !rating) {
             return res.status(400).json({ error: 'Missing required fields' })
+        }
+
+        if (rating < 1 || rating > 5) {
+            return res.status(400).json({ error: 'rating must be 1-5' })
         }
 
         await db.transaction(async (tx) => {

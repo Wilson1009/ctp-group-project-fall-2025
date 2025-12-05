@@ -1,14 +1,14 @@
-const { express } = require('express')
-const router = express.Router
+const  express = require('express')
+const router = express.Router()
 
 const { db } = require('../db/db')
-const { userMandatoryCoursesCompleted } = require('../db/schema')
-const { eq } = require('drizzle-orm/expressions')
+const { userMandatoryCourseCompleted } = require('../db/schema')
+const { eq } = require('drizzle-orm')
 
 router.get('/:userId', async (req, res) => {
     try {
         const { userId } = req.params;
-        const result = await db.select().from(userMandatoryCoursesCompleted).where(eq(userMandatoryCourseCompleted.userId, userId));
+        const result = await db.select().from(userMandatoryCourseCompleted).where(eq(userMandatoryCourseCompleted.userId, userId));
         if (result.length === 0) {
             return res.status(404).json({ error: 'User not found' });
         }
@@ -26,7 +26,7 @@ router.patch('/:userId', async (req, res) => {
         if (!updates || Object.keys(updates).length === 0) {
             return res.status(400).json({ error: 'No updates provided' });
         }
-        await db.update(userMandatoryCoursesCompleted)
+        await db.update(userMandatoryCourseCompleted)
             .set(updates)
             .where(eq(userMandatoryCourseCompleted.userId, userId));
         res.json({ success: true });

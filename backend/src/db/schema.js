@@ -35,7 +35,7 @@ const professorRating = pgTable('professorRating', {
 const reviews = pgTable('reviews', {
     id: serial('id').primaryKey(),
     instructor: text('instructor').notNull(),
-    userId: integer('userId').notNull(),
+    userId: text('userId').notNull(),
     rating: integer('rating').notNull(),
     comment: text('comment'),
     createdAt: timestamp('createdAt').defaultNow(),

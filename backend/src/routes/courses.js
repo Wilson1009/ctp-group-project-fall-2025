@@ -3,7 +3,7 @@ const router = express.Router()
 
 const { db } = require('../db/db')
 const { courses, professorRating } = require('../db/schema')
-const { eq, ilike, sql } = require('drizzle-orm/expressions')
+const { eq, sql } = require('drizzle-orm')
 
 router.get('/', async (req, res) => {
     try {
@@ -28,12 +28,14 @@ router.get('/', async (req, res) => {
                 avgRating: professorRating.avgRating,
                 ratingCount: professorRating.ratingCount
             })
-            .from(course)
+            .from(courses)
             .leftJoin(professorRating, eq(courses.instructor, professorRating.instructor))
-            .where(ilike(courses.instructor, instructor))
-            
+            .where(eq(courses.instructor, instructor))
+
         } else if (term) {
-                if (term.toLowerCase() === 'spring'){
+            q = db.select().from(courses)
+
+            if (term.toLowerCase() === 'spring'){
                 q = q.where(
                     sql`substring(${courses.meetingDates} from 2 for 1) = '1' AND substring(${courses.meetingDates} from 4 for 1) != '0'` // if course starts in January, but after first 9 days
                 ) 
@@ -43,7 +45,7 @@ router.get('/', async (req, res) => {
                 )
             } else if (term.toLowerCase() === 'fall') {
                 q = q.where(
-                    sql`substring(${courses.meetingDates} from 2 for 1) = '8` // if course starts in august
+                    sql`substring(${courses.meetingDates} from 2 for 1) = '8'` // if course starts in august
                 )
             }
         }

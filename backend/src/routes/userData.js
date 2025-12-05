@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 
 const { db } = require('../db/db')
-const { eq } = require('drizzle-orm/expressions')
-const { userData, userMandatoryCoursesCompleted } = require('../db/schema')
+const { eq } = require('drizzle-orm')
+const { userData, userMandatoryCourseCompleted } = require('../db/schema')
 
 // For getting/posting user info
 
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
             })
         }
 
-        const [userDataRecord] = db.select()
+        const [userDataRecord] = await db.select()
             .from(userData)
             .where(eq(userData.userId, userId))
 
@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
             .values({ userId, email })
             .returning()
 
-            await tx.insert(userMandatoryCoursesCompleted)
+            await tx.insert(userMandatoryCourseCompleted)
                 .values({ userId })
             
             return newUser
