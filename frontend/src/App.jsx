@@ -1,13 +1,21 @@
 import './App.css'
-import HomePage from "./components/HomePage.jsx"
+import LoginPage from "./components/LoginPage.jsx"
+import NavBar from './components/NavBar.jsx'
+import { useState } from 'react'
 import SearchResults from './SearchResults/SearchResults.jsx'
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('LoginPage')
+
+  const handleNavigate = (page) => {
+    setCurrentPage(page)
+  }
+
+  
 
   return (
     <>
-      <HomePage />
-      {<SearchResults />}
+      <NavBar onNavigate={handleNavigate}/>
     </>
   )
 }

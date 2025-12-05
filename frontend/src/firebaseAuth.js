@@ -1,49 +1,11 @@
 import {
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
 
-import {
-  doc,
-  setDoc,
-} from "firebase/firestore";
 
 import { auth, db } from "./firebase"; // from your firebase.js
-
-// SIGN UP – create user in Firebase Auth + Firestore "users" doc
-export const signUpUser = async (email, password) => {
-  try {
-    console.log("Creating Firebase user account...");
-
-    // Step 1: Create user in Firebase Auth
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const user = userCredential.user;
-
-    console.log("Firebase user created:", user.uid);
-    console.log("Storing user in Firestore...");
-
-    // Step 2: Store user in Firestore 
-    // You can add whatever fields you want here
-    await setDoc(doc(db, "users", user.uid), {
-      email: user.email,
-      createdAt: new Date().toISOString(),
-    });
-
-    console.log("User stored in Firestore!");
-    console.log("Sign up complete!");
-
-    return user;
-  } catch (error) {
-    console.error("Signup error", error.code, error.message);
-    throw error;
-  }
-};
 
 // LOGIN – authenticate existing user
 export const loginUser = async (email, password) => {

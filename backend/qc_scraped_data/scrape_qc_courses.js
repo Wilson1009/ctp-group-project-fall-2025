@@ -34,7 +34,7 @@ async function scrapeQueensCSCI() {
   `         #${id}` // or `input[name="inst_selection"][value="${id}"]`
         );
 
-        await page.select('select[name="term_value"]', "1262"); // select spring term (dev tools)
+        await page.select('select[name="term_value"]', "1259"); // select spring term (dev tools)
 
         //Must wait for navigatgion to finish because we're loading a new page
 
@@ -121,7 +121,7 @@ async function scrapeQueensCSCI() {
         ).values());
 
         const mathFiltered = deduped.filter(s => MathSet.has((s.courseTitle || "").toUpperCase()));
-        await fs.writeFile('qc_math_2026_spring.json', JSON.stringify(mathFiltered, null, 2)); // Stringify deduped if CS, otherwise mathFiltered
+        await fs.writeFile('qc_math_2025_fall.json', JSON.stringify(mathFiltered, null, 2)); // Stringify deduped if CS, otherwise mathFiltered
 
         //console.log(JSON.stringify(deduped, null, 2));
         console.log(mathFiltered.length) // check for deduped if CS, otherwise mathFiltered
