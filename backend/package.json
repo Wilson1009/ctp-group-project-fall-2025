@@ -10,11 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
     "axios": "^1.13.2",
     "axios-cookiejar-support": "^6.0.4",
     "cheerio": "^1.1.2",
+    "dotenv": "^17.2.3",
     "drizzle-orm": "^0.44.7",
     "pg": "^8.16.3",
+    "postgres": "^3.4.7",
     "puppeteer": "^24.30.0",
     "tough-cookie": "^5.1.2"
   },

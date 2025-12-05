@@ -6,8 +6,26 @@ const { reviews, professorRating } = require('../db/schema')
 const { eq } = require('drizzle-orm/expressions')
 const { sql } = require('drizzle-orm')
 
-// post new review, simultaneously update professors rating on post
+router.get('/', async (req, res) => {
+    try{
+        const { instructor } = req.query
 
+        if(!instructor){
+            res.status(400).json({ error: "Mssing instructor, instructor required" })
+        }
+
+        const allReviews = await db.select()
+        .from(reviews)
+        .where(eq(reviews.instructor, instructor))
+
+        res.json(allReviews)
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ error: err.message })
+    }
+})
+
+// post new review, simultaneously update professors rating on post
 router.post('/', async (req, res) => {
     try{
         const { instructor, userId, rating, comment } = req.body;

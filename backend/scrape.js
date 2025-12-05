@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path')
 
-const { db } = require('../db/db')
-const { courses } = require('../db/schema')
+const { db } = require('./db/db')
+const { courses } = require('./db/schema')
 
 async function importCourses() {
     // Load and parse the JSON file
 
-    const filePath = path.join(__dirname, '../frontend/Queens_Fall2025.json')
+    const filePath = path.join(__dirname, 'qc_scraped_data/qc_math_2025_fall.json') // File path for scraped json
     const raw = fs.readFileSync(filePath, 'utf-8')
     const courseList = JSON.parse(raw)
 

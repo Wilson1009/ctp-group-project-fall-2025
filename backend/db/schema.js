@@ -70,4 +70,4 @@ const userMandatoryCourseCompleted = pgTable('userMandatoryCourseCompleted', {
 
 
 
-module.exports = { courses, userData, userMandatoryCourseCompleted, professorRating, reviews, userScheduleCourses }
+export { courses, userData, userMandatoryCourseCompleted, professorRating, reviews, userScheduleCourses }

@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
         }
         const result = await db.transaction(async (tx) => {
             const [newUser] = await tx.insert(userData)
-            .values( { userId, email })
+            .values({ userId, email })
             .returning()
 
             await tx.insert(userMandatoryCoursesCompleted)
@@ -65,7 +65,7 @@ router.post('/', async (req, res) => {
             return newUser
         })
         
-        res.status(201).json(newUser)
+        res.status(201).json(result)
     } catch (error) {
         console.error('POST api/user/userData error:', error)
         res.status(500).json({ error: error.message })

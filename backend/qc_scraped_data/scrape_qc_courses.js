@@ -74,7 +74,7 @@ async function scrapeQueensCSCI() {
                 const courseNum  = match[2].trim(); // "111"
                 const courseTitle = `${courseCode}-${courseNum}`; // "CSCI-111"
 
-                // 2️⃣ Get the <a> that controls the content div; parse its href
+                // Get the <a> that controls the content div; parse its href
                 const link = span.querySelector("a[id^='imageDivLink']");
                 if (!link) return;
 

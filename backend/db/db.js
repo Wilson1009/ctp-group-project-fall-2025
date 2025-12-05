@@ -4,10 +4,10 @@ const postgres = require('postgres')
 
 require('dotenv').config()
 
-const connectionString = process.env.DATEBASE_URL
+const connectionString = process.env.DATABASE_URL
 
 const client = postgres(connectionString)
 
 const db = drizzle(client)
 
-module.exports(db)
+module.exports = { db }

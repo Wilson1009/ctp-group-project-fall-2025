@@ -30,7 +30,7 @@ router.patch('/:userId', async (req, res) => {
             .set(updates)
             .where(eq(userMandatoryCourseCompleted.userId, userId));
         res.json({ success: true });
-    } catch (err) {
+    }catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Failed to update mandatory courses' });
     }
