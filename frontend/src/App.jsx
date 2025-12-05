@@ -1,11 +1,14 @@
 import './App.css'
 import LoginPage from "./components/LoginPage.jsx"
 import NavBar from './components/NavBar.jsx'
+import Home from './components/Home/Home.jsx'
 import { useState, useEffect } from 'react'
 import SearchResults from './components/SearchResults/SearchResults.jsx'
 import { subscribeToAuthChanges, logoutUser } from './firebase'
+import { getUserData } from './api/api'
+
 function App() {
-  const [currentPage, setCurrentPage] = useState('LoginPage')
+  const [currentPage, setCurrentPage] = useState('home')
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -33,6 +36,10 @@ function App() {
     loadUserData()
   },[user])
 
+  if(loading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div> // loading screen so auth isn't caught on reset
+  }
+
   const handleNavigate = (page) => {
     setCurrentPage(page)
   }
@@ -57,6 +64,7 @@ function App() {
     <>
       <NavBar onNavigate={handleNavigate} onLogout={handleLogout}/>
 
+      {currentPage === 'home' && <Home/>}
       {currentPage === 'coursepicker' && <CoursePickerPage/>}
       {currentPage === 'progress' && <Progress />}
     </>

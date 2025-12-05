@@ -29,7 +29,7 @@ export const auth = getAuth(app)
 
 //SIGN UP= Create Firebase user AND store in DB
 
-export const signUpUser = async ({email, password}) => {
+export const signUpUser = async (email, password) => {
   try {
 
     console.log('Creating Firebase user account')
@@ -43,7 +43,7 @@ export const signUpUser = async ({email, password}) => {
 
     //Step 2: Store user in YOUR DB
 
-    await createUser(user.uid, user.email)
+    await createUser({ userId: user.uid, email: user.email })
 
     console.log('User stored in DB!')
     console.log('Sign up complete!')

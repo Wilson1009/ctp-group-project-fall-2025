@@ -31,7 +31,7 @@ export const postReview = async ({ instructor, userId, rating, comment }) => {
     const response = await fetch(`${API_BASE}/api/reviews`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(instructor, userId, rating, comment)
+        body: JSON.stringify({ instructor, userId, rating, comment })
     })
     if (!response.ok) throw new Error('Failed to post review')
     return response.json()
