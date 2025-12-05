@@ -9,3 +9,20 @@ body {
     font-family: 'Press Start 2P', system-ui, sans-serif;
 }
 
+@keyframes logo-bounce {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.logo-bounce {
+    animation: logo-bounce 0.9s infinite ease-in-out;
+    image-rendering: pixelated;
+}
+

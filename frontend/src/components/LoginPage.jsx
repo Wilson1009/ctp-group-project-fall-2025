@@ -1,4 +1,5 @@
 import BannerRed from '../assets/BannerRed.png';
+import LogoLegs from '../assets/LogoLegs.png'
 import { useState } from 'react'
 import { signUpUser, loginUser } from '../firebase'
 
@@ -44,39 +45,53 @@ function LoginPage({ onAuthSuccess }) {
         }
     }
 
-   return (
-    <div className="min-h-screen bg-[#FFF5E6] flex flex-col items-center justify-start px-4">
+  return (
+  <div className="min-h-screen bg-[#FFF5E6] flex flex-col items-center">
+
+    <div className="flex flex-col items-center w-full">
 
       {/* Banner */}
-      <div className="relative inline-block mb-10">
+      <div className="relative inline-block">
         <img
           src={BannerRed}
           alt="Banner"
-          className="w-[500px] mx-auto"
+          className="w-[350px] mx-auto"
         />
-        <h1 className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-[#5C2E12] text-sm">
-          Hello QC Student!
+        <h1
+          className="
+            absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 
+            font-bold text-[#5C2E12] text-xs
+          "
+        >
+          Hello Student!
         </h1>
       </div>
 
-      {/* Card container */}
-      <div className="
-        bg-[#E5B276]
-        border-4 border-[#8A4B27]
-        rounded-xl
-        shadow-[6px_6px_0px_#5C2E12]
-        w-full max-w-md
-        p-8
-        text-center
-      ">
+      {/* Logo (sprite) */}
+      <img
+        src={LogoLegs}
+        className="w-[250px] h-[250px] logo-bounce"
+        style={{ imageRendering: "pixelated" }}
+      />
 
-        <h2 className="text-2xl font-bold text-[#5C2E12] mb-6 text-center">
+      {/* Form container */}
+      <div
+        className="
+          bg-[#E5B276]
+          border-4 border-[#8A4B27]
+          rounded-xl
+          shadow-[6px_6px_0px_#5C2E12]
+          w-full max-w-md
+          p-6
+          text-center
+        "
+      >
+        <h2 className="text-xl font-bold text-[#5C2E12] mb-4">
           {isSignUp ? 'Create Account' : 'Welcome Back'}
         </h2>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col">
 
-          {/* Input boxes */}
           <input
             type="email"
             placeholder="email"
@@ -109,12 +124,10 @@ function LoginPage({ onAuthSuccess }) {
             "
           />
 
-          {/* Error text */}
           {error && (
             <p className="text-red-700 font-semibold text-sm">{error}</p>
           )}
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
@@ -122,35 +135,34 @@ function LoginPage({ onAuthSuccess }) {
               bg-[#D4904F]
               border-4 border-[#8A4B27]
               rounded-xl
-              px-6 py-3
+              px-6 py-2
               text-white font-bold
               shadow-[4px_4px_0px_#5C2E12]
-              active:translate-x-[3px] active:translate-y-[3px] active:shadow-none
-              transition-all
+              active:translate-x-[2px] active:translate-y-[2px] active:shadow-none
             "
           >
             {loading ? 'Loading...' : isSignUp ? 'Sign Up' : 'Log In'}
           </button>
         </form>
 
-        {/* Toggle login/signup */}
-        <p className="mt-6 text-[#5C2E12] font-medium">
+        <p className="mt-4 text-[#5C2E12] font-medium text-sm">
           {isSignUp ? 'Already have an account?' : "Don't have an account?"}
-
           <button
             type="button"
             onClick={() => {
               setIsSignUp(!isSignUp);
               setError('');
             }}
-            className="ml-2 text-blue-700 underline"
+            className="ml-1 text-blue-700 underline"
           >
             {isSignUp ? 'Log In' : 'Sign Up'}
           </button>
         </p>
       </div>
     </div>
-  );
+  </div>
+
+);
 }
 
 export default LoginPage
