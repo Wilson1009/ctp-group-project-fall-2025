@@ -1,25 +1,7 @@
-import Timer from "./Timer";
-import { useState } from "react";
-
-const Calendar = () => {
-    const [events, setEvents] = useState([]); // submitted times that render colored blocks
-
-    // addTime: store submitted times into `events` so markers/blocks render in the day area
-    const addTime = (payload) => {
-        // keep backward compatibility: if a plain string is passed, convert to object
-        if (typeof payload === 'string') {
-            setEvents((prev) => [...prev, { time: payload, color: '#a64d5d' }]);
-            return;
-        }
-        setEvents((prev) => [...prev, payload]);
-    };
-
+const Calendar = ({ events = [] }) => {
     return(
-        <>
-            <div className="w-[685px] mx-auto flex justify-center mb-4">
-                <Timer onAddTime={addTime} />
-            </div>
-            <div className="bg-[#C58747] w-[685px] mx-4 rounded-[25px] h-[578px] flex items-center justify-center">
+        <div className="w-[685px]">
+            <div className="bg-[#C58747] w-full rounded-[25px] h-[578px] flex items-center justify-center">
             <div className="w-full max-w-[640px] grid grid-cols-8 gap-3 text-center items-center rounded-[25px]">
                 <div className="bg-[#A67A4D] rounded-[25px] w-[76px] h-[30px] flex items-center justify-center text-[#F8E1CB]">
                     <p className="m-0">Time</p>
@@ -93,7 +75,7 @@ const Calendar = () => {
                 
             </div>
             </div>
-        </>
+        </div>
     )
 }
 

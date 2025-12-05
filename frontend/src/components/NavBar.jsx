@@ -4,18 +4,18 @@
 function Navbar({ onNavigate }) {
     return (
         <nav className="relative h-20">
-            <img 
+            {/* <img 
                 src={NavbarBg} 
                 alt="Navbar background" 
                 className="absolute inset-0 w-full h-full object-cover"
-            />
+            /> */}
             <div className="relative container mx-auto h-full flex justify-between items-center px-1">
                 <div className="flex items-center">
-                    <img 
+                    {/* <img 
                         src={Logo} 
                         alt="Logo" 
                         className="h-40 w-40 mt-18"
-                    />
+                    /> */}
                 </div>
                 <ul className="flex space-x-6">
                     <li>
