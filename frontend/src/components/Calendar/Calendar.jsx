@@ -19,54 +19,64 @@ const Calendar = ({ events = [] }) => {
                 </div>
                 <div></div>
                 {/* second row: left column is the time column (stacked boxes); columns 2–7 are tall day blocks */}
-                <div className="flex flex-col items-center gap-3 h-[445px] overflow-auto py-2 no-scrollbar">
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">8:00-9:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">9:00-10:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">10:00-11:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">11:00-12:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">13:00-14:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">14:00-15:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">15:00-16:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">16:00-17:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">17:00-18:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">18:00-19:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">19:00-20:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">20:00-21:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
-                    <div className="w-[75px] h-[60px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white">21:00-22:00<p className="m-0 text-sm text-[#4C2F1A]"></p></div>
+                <div className="flex flex-col items-center gap-1 h-[445px] py-2 no-scrollbar">
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">7-8 AM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">8-9 AM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">9-10 AM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">10-11 AM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">11-12 PM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">1-2 PM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">2-3 PM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">3-4 PM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">4-5 PM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">5-6 PM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">6-7 PM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">7-8 PM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">8-9 PM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
+                    <div className="w-[75px] h-[33px] bg-[#DBA069] rounded-[25px] flex items-center justify-center text-white text-xs">9-10 PM<p className="m-0 text-xs text-[#4C2F1A]"></p></div>
                 </div>
-                <div className="col-span-6 h-[445px] bg-[#E6BD97] rounded-[10px] justify-self-center relative overflow-hidden w-[530px] mx-auto">
-                    {/* Wide day area — faint horizontal guide lines matching left time boxes */}
-                    {Array.from({ length: 13 }).map((_, idx) => {
-                        const slotCount = 13;
-                        const topPercent = ((idx + 0.5) / slotCount) * 100; // center of each left slot
+                <div className="col-span-6 h-[445px] bg-[#E6BD97] rounded-[10px] justify-self-center relative overflow-hidden w-[530px] mx-auto grid grid-cols-6 gap-1 p-2">
+                    {/* Day columns with time-positioned class markers */}
+                    {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => {
+                        const dayEvents = events.filter((evt) => evt && evt.day === day);
                         return (
-                            <div
-                                key={`line-${idx}`}
-                                className="absolute left-2 right-2 h-px bg-[#CFAE8F] opacity-40"
-                                style={{ top: `${topPercent}%`, transform: 'translateY(-50%)' }}
-                            />
-                        );
-                    })}
-
-                    {/* Wide day area — render colored timestamp markers mapped by time-of-day */}
-                    {events.map((evt, i) => {
-                        if (!evt) return null;
-                        // evt can be a string (legacy) or an object {time, color, day, class}
-                        const timeStr = typeof evt === 'string' ? evt : evt.time;
-                        const parts = timeStr.split(":");
-                        const h = parseInt(parts[0] || "0", 10);
-                        const m = parseInt(parts[1] || "0", 10);
-                        const minutes = (isNaN(h) ? 0 : h) * 60 + (isNaN(m) ? 0 : m);
-                        const topPercent = (minutes / 1440) * 100; // position in the full day
-                        const bg = (evt && evt.color) || '#a64d5d';
-                        const labelText = typeof evt === 'string' ? evt : `${evt.time}${evt.class ? ' • ' + evt.class : ''}`;
-                        return (
-                            <div
-                                key={`marker-${i}`}
-                                className="absolute left-3 right-3 h-4 rounded-md flex items-center justify-center text-xs text-[#F8E1CB]"
-                                style={{ top: `${topPercent}%`, transform: "translateY(-50%)", background: bg }}
-                            >
-                                {labelText}
+                            <div key={day} className="relative h-full">
+                                {/* Guide lines for each time slot (7 AM - 10 PM = 15 hours) */}
+                                {Array.from({ length: 15 }).map((_, idx) => {
+                                    const slotCount = 15;
+                                    const topPercent = ((idx + 0.5) / slotCount) * 100;
+                                    return (
+                                        <div
+                                            key={`line-${day}-${idx}`}
+                                            className="absolute left-0 right-0 h-px bg-[#CFAE8F] opacity-40"
+                                            style={{ top: `${topPercent}%`, transform: 'translateY(-50%)' }}
+                                        />
+                                    );
+                                })}
+                                {/* Class markers for this day */}
+                                {dayEvents.map((evt, i) => {
+                                    const timeStr = evt.time;
+                                    const parts = timeStr.split(":");
+                                    const h = parseInt(parts[0] || "0", 10);
+                                    const m = parseInt(parts[1] || "0", 10);
+                                    const minutes = (isNaN(h) ? 0 : h) * 60 + (isNaN(m) ? 0 : m);
+                                    const startMinutes = 7 * 60; // 7:00 AM
+                                    const endMinutes = 22 * 60; // 10:00 PM
+                                    const rangeMinutes = endMinutes - startMinutes; // 900 minutes = 15 hours
+                                    const topPercent = ((minutes - startMinutes) / rangeMinutes) * 100;
+                                    const bg = evt.color || '#a64d5d';
+                                    const className = evt.class ? evt.class.split(':')[1] : 'Class';
+                                    return (
+                                        <div
+                                            key={`marker-${day}-${i}`}
+                                            className="absolute left-1 right-1 h-3 rounded-sm flex items-center justify-center text-xs font-semibold text-white overflow-hidden"
+                                            style={{ top: `${topPercent}%`, transform: 'translateY(-50%)', background: bg }}
+                                            title={`${evt.time} - ${className}`}
+                                        >
+                                            {className}
+                                        </div>
+                                    );
+                                })}
                             </div>
                         );
                     })}

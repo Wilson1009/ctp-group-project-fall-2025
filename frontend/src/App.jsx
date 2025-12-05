@@ -7,7 +7,6 @@ import SideBarCal from "./components/Calendar/SideBarCal.jsx";
 function App() {
   const [events, setEvents] = useState([]);
 
-  // Add submitted times to shared events so calendar renders them.
   const addTime = (payload) => {
     if (typeof payload === "string") {
       setEvents((prev) => [...prev, { time: payload, color: "#a64d5d" }]);
@@ -20,7 +19,7 @@ function App() {
     <div className="min-h-screen bg-[#f7eedb] flex flex-col items-center py-8 px-6 gap-4">
       <Timer onAddTime={addTime} />
       <div className="flex gap-6 items-start">
-        <SideBarCal />
+        <SideBarCal events={events} />
         <Calendar events={events} />
       </div>
     </div>
