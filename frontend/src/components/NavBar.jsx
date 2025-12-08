@@ -53,6 +53,15 @@ function Navbar({ onNavigate, onLogout }) {
         </li>
 
         <li>
+          <button
+          onClick={() => onNavigate('search-results')}
+          className="hover:text-[rgb(188,138,82)] transition-colors"
+          >
+            Search Results
+          </button>
+        </li>
+
+        <li>
           <button 
             onClick={onLogout}
             className="hover:text-[rgb(188,138,82)] transition-colors"

@@ -1,4 +1,4 @@
-import ReviewFrame from "../assets/ReviewFrame.png"
+import ReviewFrame from "../../assets/ReviewFrame.png"
 
 function Reviews(props) {
 

@@ -58,13 +58,13 @@ export const createUser = async ({ userId, email }) => {
 // Mandatory Courses
 
 export const getMandatoryCourse = async (userId) => {
-    const response = await fetch(`${API_BASE}/api/userMandatoryCourse/${encodeURIComponent(userId)}`)
+    const response = await fetch(`${API_BASE}/api/userMandatoryCourses/${encodeURIComponent(userId)}`)
     if (!response.ok) throw new Error('Failed to fetch mandatory courses')
     return response.json()
 }
 
 export const updateMandatoryCourses = async (userId, updates) => {
-    const response = await fetch(`${API_BASE}/api/userMandatoryCourse/${encodeURIComponent(userId)}`, {
+    const response = await fetch(`${API_BASE}/api/userMandatoryCourses/${encodeURIComponent(userId)}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates) // stringify object of format (CSCI_111 : true)

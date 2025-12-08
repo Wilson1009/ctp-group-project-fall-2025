@@ -26,6 +26,7 @@ router.patch('/:userId', async (req, res) => {
         if (!updates || Object.keys(updates).length === 0) {
             return res.status(400).json({ error: 'No updates provided' });
         }
+        console.log('PATCH userMandatoryCourse', { userId, updates });
         await db.update(userMandatoryCourseCompleted)
             .set(updates)
             .where(eq(userMandatoryCourseCompleted.userId, userId));

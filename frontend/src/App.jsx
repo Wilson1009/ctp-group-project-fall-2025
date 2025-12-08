@@ -2,6 +2,7 @@ import './App.css'
 import LoginPage from "./components/LoginPage.jsx"
 import NavBar from './components/NavBar.jsx'
 import Home from './components/Home/Home.jsx'
+import Progress from './components/Progress/Progress.jsx'
 import { useState, useEffect } from 'react'
 import SearchResults from './components/SearchResults/SearchResults.jsx'
 import { subscribeToAuthChanges, logoutUser } from './firebase'
@@ -64,9 +65,10 @@ function App() {
     <>
       <NavBar onNavigate={handleNavigate} onLogout={handleLogout}/>
 
-      {currentPage === 'home' && <Home/>}
-      {currentPage === 'coursepicker' && <CoursePickerPage/>}
-      {currentPage === 'progress' && <Progress />}
+      <div style={{ display: currentPage === 'home' ? 'block' : 'none' }}><Home/></div>
+      <div style={{ display: currentPage === 'progress' ? 'block' : 'none' }}><Progress user={user}/></div>
+      <div style={{ display: currentPage === 'search-results' ? 'block' : 'none' }}><SearchResults /></div>
+
     </>
   )
 }
