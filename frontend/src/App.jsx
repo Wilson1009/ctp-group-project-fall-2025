@@ -58,8 +58,6 @@ function App() {
     return <LoginPage onAuthSuccess={handleAuthSuccess} />
   }
 
-  
-
   return (
     <>
       <NavBar onNavigate={handleNavigate} onLogout={handleLogout}/>

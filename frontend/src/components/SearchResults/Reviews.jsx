@@ -1,10 +1,10 @@
-import ReviewFrame from "../assets/ReviewFrame.png"
+import ReviewFrame from "../../assets/ReviewFrame.png"
 
 function Reviews(props) {
 
     return (
         <div
-            className="relative w-full max-w-screen-lg mx-auto bg-no-repeat bg-center [image-rendering:pixelated] py-8 min-h-0 mb-4 " 
+            className="relative w-full max-w-5xl mx-auto bg-no-repeat bg-center [image-rendering:pixelated] py-8 min-h-0 mb-4 " 
             style={{ 
                 backgroundImage: `url(${ReviewFrame})`, 
                 backgroundSize: '100% 100%',

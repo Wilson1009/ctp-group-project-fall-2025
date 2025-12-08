@@ -10,7 +10,7 @@ function Navbar({ onNavigate, onLogout }) {
         <img 
           src={Logo}
           alt="Logo"
-          className="image-render-pixel w-[128px] h-[128px]"   // MUCH smaller
+          className="image-render-pixel w-32 h-32"   // MUCH smaller
         />
       </div>
 

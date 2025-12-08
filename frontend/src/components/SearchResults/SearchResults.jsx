@@ -1,126 +1,216 @@
-//import ProfileFrame from "../assets/ProfileFrame.png";
-//import Temp from "../assets/Temp.png";
-//import Reviews from "./Reviews";
-//import data from "../../public/data.json"
-//import BannerRed from "../assets/BannerRed.png"
-//import CoursesTaughtComponent from "./CoursesTaughtComponent";
+import { useState, useEffect } from "react";
+import ProfileFrame from "../../assets/ProfileFrame.png";
+import Reviews from "./Reviews";
+import BannerRed from "../../assets/BannerRed.png";
+import CoursesTaughtComponent from "./CoursesTaughtComponent";
 
-function SearchResults() {
-    //Temp data
-    const professorName = "Dr. John Smith";
-    const distinctCourseNames = new Set();
+const BACKEND_API_URL = "http://localhost:3001";
 
-    data.forEach(user => {
-        user.reviews.forEach(review => {
-            if (review.professorName === professorName) {
-                distinctCourseNames.add(review.courseName);
-            }
-        });
-    });
+// Accept 'searchedProfessor' as a prop
+function SearchResults({ searchedProfessor }) {
+  // State for fetched data
+  const [professorReviews, setProfessorReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const professorReviews = data.flatMap(user =>
-        user.reviews.filter(review => review.professorName === professorName)
-    );
+  // Use the prop for the display name and API lookup
+  const professorName = searchedProfessor || "Professor Not Found"; 
 
-    // 2. Calculate Totals
-    let totalRatingsCount = professorReviews.length;
-    let totalStarSum = 0;
+  // START: DATA FETCHING LOGIC
 
-    professorReviews.forEach(review => {
-        totalStarSum += review.rating;
-    });
+  // useEffect now depends on 'searchedProfessor'
+  useEffect(() => {
+    // Skip fetch if the prop is empty or null
+    if (!searchedProfessor) {
+        setIsLoading(false);
+        setError("No professor name provided for search.");
+        return;
+    }
 
-    // 3. Calculate Average
-    const averageStarRating = totalRatingsCount > 0
-        ? (totalStarSum / totalRatingsCount).toFixed(1) // ToFixed(1) keeps one decimal place
-        : 0;
+    // 1. Fetching Professor Reviews from Backend
+    const fetchProfessorData = async () => {
+      setIsLoading(true);
+      setError(null);
 
-    return (
-        <>
-            <div className="bg-[rgb(141,89,29)] p-4 text-white">temp nav bar</div>
-            <div className="bg-[rgb(224,202,148)] flex w-[90vw] h-[70vh] items-center mx-auto mt-20 space-x-10 rounded-xl">
-                <div className="w-[100vh] relative flex justify-center items-center">
-                    <img
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[90%] h-auto max-w-full"
-                        src={ProfileFrame}
-                        alt="Profile Frame"
-                    />
-                    <img
-                        className="w-[80%] h-auto mx-auto relative z-0"
-                        src={Temp}
-                        alt="Overlay Content"
-                    />
-                </div>
+      // Encode the name to handle spaces/special characters in the URL
+      const encodedProfessorName = encodeURIComponent(searchedProfessor);
 
-                <div className="max-w-[80vh] max-h-[70vh] flex flex-col items-center">
-                    <img
-                        className="max-w-[75vh] h-auto"
-                        src={BannerRed}
-                        alt="Banner"
-                    />
-                    <h1 className="font-bold mt-4 mb-2 absolute text-[min(5vw,35px)]">{professorName}</h1>
+      try {
+        const response = await fetch(
+          `${BACKEND_API_URL}/api/reviews?professorName=${encodedProfessorName}`
+        );
 
-                    {/* Star Rating */}
-                    <div className=" w-[40vh]">
-                        {/* Star Rating Display Area */}
-                        <div className="p-4 flex flex-col items-center justify-center mb-7">
+        if (!response.ok) {
+          // If the server returns a 404, 500, etc.
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-                            {/* Average Star Rating */}
-                            <div className="text-1xl text-yellow-500">
-                                {'⭐'.repeat(Math.floor(averageStarRating))}
-                                {'☆'.repeat(5 - Math.floor(averageStarRating))}
-                            </div>
-                            <h3 className="text-1xl font-bold text-gray-800">
-                                {averageStarRating} / 5.0
-                            </h3>
+        const data = await response.json();
+        setProfessorReviews(data); 
 
-                            {/* Total Rating Count */}
-                            <p className="text-xs text-gray-600">
-                                Based on {totalRatingsCount} reviews
-                            </p>
+      } catch (e) {
+        console.error("Error fetching professor data:", e);
+        setError("Failed to load professor data. Check server status or API route.");
+        setProfessorReviews([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-                        </div>
+    fetchProfessorData();
 
-                        {/* ... Courses Taught section follows ... */}
-                    </div>
-                    <div className="border-2 border-black p-4 shadow-xl">
-                        <h3 className="font-black">Courses Taught:</h3>
-                        <div className=" flex flex-wrap p-4 space-x-4 overflow-y-scroll h-[20vh]">
-                            {/* Convert the Set to an array for mapping in JSX */}
-                            {[...distinctCourseNames].map((courseName) => (
-                                <div key={courseName} className="w-[calc(33.333%-1rem)] mb-4">
-                                    <CoursesTaughtComponent
-                                        courseName={courseName}
-                                    />
-                                </div>
-                            ))}
-                        </div>
+    // 2. TEMPORARY POKEMON IMAGE FETCH (This remains static for now)
+    const randomId = Math.floor(Math.random() * 151) + 1;
+    fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`)
+      .then((res) => res.json())
+      .then((data) => setTempImg(data))
+      .catch((err) => console.error("Error fetching Pokémon:", err));
+      
+  }, [searchedProfessor]); // Reruns if the searchedProfessor prop changes
 
-                    </div>
-                </div>
+  // END: DATA FETCHING LOGIC 
 
-                <div className="w-[100vh] h-[55vh] border-2 border-black shadow-xl overflow-hidden mr-7">
-                    <h2 className="text-[30px] font-bold p-4 text-sm md:text-base lg:text-lg xl:text-xl">Ratings & Reviews</h2>
-                    <div className="overflow-y-auto h-[45vh] p-4">
-                        {data.map((user, uIndex) => (
-                            user.reviews.map((review, rIndex) => (
-                                <Reviews
-                                    key={`${uIndex}-${rIndex}`} // Use uIndex (user index) and rIndex (review index) for a unique key
-                                    name={user.name}
-                                    courseName={review.courseName}
-                                    date={review.date}
-                                    professorName={review.professorName}
-                                    comment={review.comment}
-                                />
-                            )
-                            ))
-                        )}
-                    </div>
-                </div>
 
+  // State for the temporary Pokemon image
+  const [tempImg, setTempImg] = useState(null);
+
+  // START: DATA PROCESSING LOGIC
+
+  // 1. Calculate distinct course names
+  const distinctCourseNames = new Set(
+    professorReviews.map(review => review.courseName)
+  );
+
+  // 2. Calculate Totals and Average
+  const totalRatingsCount = professorReviews.length;
+  const totalStarSum = professorReviews.reduce((sum, review) => sum + review.rating, 0);
+
+  const averageStarRating =
+    totalRatingsCount > 0
+      ? (totalStarSum / totalRatingsCount).toFixed(1)
+      : 0;
+
+  // END: DATA PROCESSING LOGIC 
+
+
+  // START: RENDERING LOGIC
+
+  // Handle Loading and Error States
+  if (isLoading) {
+    return <div className="text-center p-8">Loading data for {professorName}...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center p-8 text-red-600 font-bold">{error}</div>;
+  }
+  
+  // Display a message if no reviews are found (e.g., if the professor is valid but has no reviews)
+  if (totalRatingsCount === 0) {
+     return <div className="text-center p-8 text-gray-800">No reviews found for {professorName}.</div>;
+  }
+
+  return (
+    <>
+      <div className="bg-[rgb(141,89,29)] p-4 text-white">temp nav bar</div>
+
+      {/* background */}
+      <div className="bg-[rgb(224,202,148)] flex-col mx-auto w-[90vw] rounded-3xl h-100% pb-5 -z-50">
+        {/* Information Page */}
+        <div className="flex w-full h-[80vh] justify-self-end-safe items-center mx-auto mt-8">
+          <div className="pl-10 w-[60vh]">
+            <div className="relative flex justify-center items-center w-full h-40">
+              <img
+                src={BannerRed}
+                alt="Banner"
+                className="absolute w-full h-full object-contain mt-15 z-0"
+              />
+              <h1
+                className="
+                  mt-5
+                  w-full
+                  font-bold
+                  text-[clamp(0.5rem,6vw,2rem)] 
+                  text-center 
+                  absolute 
+                  top-1/2 
+                  left-1/2 
+                  transform 
+                  -translate-x-1/2 
+                  -translate-y-1/2 
+                  z-10
+                  max-w-full 
+                  overflow-hidden 
+                  whitespace-nowrap
+                  "
+              >
+                {professorName}
+              </h1>
             </div>
-        </>
-    );
+
+            {/* Centered Image */}
+            <div className="relative mt-10">
+              <img
+                className="w-[80%] h-auto mx-auto relative z-0"
+                src={tempImg ? tempImg.sprites.front_default : null}
+                alt={tempImg ? `Sprite of ${tempImg.name}` : "Overlay Content"}
+              />
+              <img
+                className="w-[80%] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                src={ProfileFrame}
+                alt="Profile Frame"
+              />
+            </div>
+            <div className="p-3 flex flex-col items-center justify-center">
+              <div className="text-2xl text-yellow-500">
+                {"⭐".repeat(Math.floor(averageStarRating))}
+                {"☆".repeat(5 - Math.floor(averageStarRating))}
+              </div>
+
+              <h3 className="text-[20px] font-bold text-gray-800">
+                {averageStarRating} / 5.0
+              </h3>
+
+              <p className="text-s text-gray-600">
+                Based on {totalRatingsCount} reviews
+              </p>
+            </div>
+          </div>
+          {/* Courses Taught */}
+
+          <div className="mx-auto h-[60vh] w-[80vh]">
+            <div className="border-2 border-black p-4 shadow-x h-full">
+              <h3 className="font-black">Courses Taught:</h3>
+              <div className="flex flex-wrap p-4 space-x-4 overflow-y-scroll h-[full]">
+                {[...distinctCourseNames].map((courseName) => (
+                  <div key={courseName} className="w-[calc(33.333%-1rem)] mb-4">
+                    <CoursesTaughtComponent courseName={courseName} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/*Reviews*/}
+        <div className="w-90vh mt-10">
+          <h2 className="text-[30px] font-bold p-4 ">Ratings & Reviews</h2>
+          <div className="p-4">
+            {/* Map over the fetched professorReviews state */}
+            {professorReviews.map((review, rIndex) => (
+              <Reviews
+                key={rIndex}
+                name={review.userName || "Anonymous"} 
+                courseName={review.courseName}
+                date={review.date}
+                professorName={professorName} 
+                comment={review.comment}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default SearchResults;
