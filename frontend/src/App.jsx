@@ -8,6 +8,7 @@ import SearchResults from './components/SearchResults/SearchResults.jsx'
 import { subscribeToAuthChanges, logoutUser } from './firebase'
 import { getUserData } from './api/api'
 import CoursePickerPage from './components/CoursePicker/CoursePickerPage.jsx'
+import ScheduleBuilder from './components/Calendar/ScheduleBuilder.jsx'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -76,6 +77,9 @@ function App() {
       <div style={{ display: currentPage === 'progress' ? 'block' : 'none' }}><Progress user={user}/></div>
       <div style={{ display: currentPage === 'search-results' ? 'block' : 'none' }}><SearchResults searchedProfessor={selectedProfessor} user={user} /></div>
       <div style={{ display: currentPage === 'coursepicker' ? 'block' : 'none'}}><CoursePickerPage /> </div>
+      <div style={{ display: currentPage === 'schedule' ? 'block' : 'none'}}>
+        <ScheduleBuilder user={user} />
+      </div>
 
     </>
   )

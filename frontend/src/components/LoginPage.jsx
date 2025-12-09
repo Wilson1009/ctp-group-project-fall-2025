@@ -90,7 +90,7 @@ function LoginPage({ onAuthSuccess }) {
           {isSignUp ? 'Create Account' : 'Welcome Back'}
         </h2>
 
-        <form onSubmit={handleSubmit} className="flex flex-col">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
           <input
             type="email"

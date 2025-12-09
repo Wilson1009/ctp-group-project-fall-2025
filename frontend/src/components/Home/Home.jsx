@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchInstructors } from "../../api/api";
+import mapAnim from "../../assets/MapAnimation.png";
 
 function Home({ onProfessorSelect }) {
     const [instructors, setInstructors] = useState([]);
@@ -92,6 +93,15 @@ function Home({ onProfessorSelect }) {
                             </div>
                         )}
                     </form>
+                </div>
+
+                {/* Sprite animation under the search card */}
+                <div className="mt-6 flex justify-center">
+                    <div
+                        className="map-sprite"
+                        style={{ backgroundImage: `url(${mapAnim})` }}
+                        aria-hidden
+                    />
                 </div>
             </div>
         </div>

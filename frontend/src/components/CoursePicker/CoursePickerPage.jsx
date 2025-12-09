@@ -51,7 +51,7 @@ function CoursePickerPage () {
 
     return (
         <div className="min-h-screen bg-amber-50 p-8 font-press">
-            <h1 className=''>Course Picker</h1>           
+            <h1 className="text-4xl font-bold text-amber-900 text-center mb-8">Course Picker</h1>           
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Left side - Course List */}
                 <div className="bg-[rgb(224,202,148)] rounded-lg border-4 border-amber-800 p-6 shadow-lg">
@@ -109,7 +109,7 @@ function CoursePickerPage () {
 
                                             {/* Meeting Times */}
                                             <div className="space-y-2">
-                                                <div className="font-semibold text-amber-900">Meeting Times:</div>
+                                                <div className="font-semibold text-amber-900">Meeting Time:</div>
                                                 <div className="bg-white p-3 rounded border border-amber-400">
                                                     {section.daysAndTimes}
                                                 </div>

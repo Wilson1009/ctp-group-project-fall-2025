@@ -21,7 +21,8 @@ const userData = pgTable('userData', {
 const userScheduleCourses = pgTable('userScheduleCourses', {
     scheduleId: serial('scheduleId').primaryKey(),
     userId: text('userId').notNull(),
-    courseTitle: text('courseTitle').notNull(),
+    term: text('term').notNull(), // e.g., 'spring', 'winter', 'fall'
+    schedule: jsonb('schedule').notNull(), // jsonb payload for the schedule entries
 })
 
 const professorRating = pgTable('professorRating', {

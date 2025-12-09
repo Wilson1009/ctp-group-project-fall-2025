@@ -11,6 +11,7 @@ const reviewsRouter = require('./routes/reviews')
 const userDataRouter = require('./routes/userData')
 
 const userMandatoryCoursesRouter = require('./routes/userMandatoryCourse')
+const schedulesRouter = require('./routes/schedules')
 
 const app = express()
 
@@ -29,6 +30,7 @@ app.use('/api/courses', coursesRouter)
 app.use('/api/reviews', reviewsRouter)
 app.use('/api/userData', userDataRouter)
 app.use('/api/userMandatoryCourses', userMandatoryCoursesRouter)
+app.use('/api/schedules', schedulesRouter)
 
 const PORT = process.env.PORT || 3001
 
