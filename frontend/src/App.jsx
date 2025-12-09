@@ -2,15 +2,19 @@ import './App.css'
 import LoginPage from "./components/LoginPage.jsx"
 import NavBar from './components/NavBar.jsx'
 import Home from './components/Home/Home.jsx'
+import Progress from './components/Progress/Progress.jsx'
 import { useState, useEffect } from 'react'
 import SearchResults from './components/SearchResults/SearchResults.jsx'
 import { subscribeToAuthChanges, logoutUser } from './firebase'
 import { getUserData } from './api/api'
+import CoursePickerPage from './components/CoursePicker/CoursePickerPage.jsx'
+import ScheduleBuilder from './components/Calendar/ScheduleBuilder.jsx'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [selectedProfessor, setSelectedProfessor] = useState(null)
 
   useEffect(() => {
     const unsubscribe = subscribeToAuthChanges((firebaseUser) => {
@@ -54,6 +58,11 @@ function App() {
     setCurrentPage('home')
   }
 
+  const handleProfessorSelect = (professorName) => {
+    setSelectedProfessor(professorName)
+    setCurrentPage('search-results')
+  }
+
   if (!user) {
     return <LoginPage onAuthSuccess={handleAuthSuccess} />
   }
@@ -62,9 +71,14 @@ function App() {
     <>
       <NavBar onNavigate={handleNavigate} onLogout={handleLogout}/>
 
-      {currentPage === 'home' && <Home/>}
-      {currentPage === 'coursepicker' && <CoursePickerPage/>}
-      {currentPage === 'progress' && <Progress />}
+      <div style={{ display: currentPage === 'home' ? 'block' : 'none' }}><Home onProfessorSelect={handleProfessorSelect}/></div>
+      <div style={{ display: currentPage === 'progress' ? 'block' : 'none' }}><Progress user={user}/></div>
+      <div style={{ display: currentPage === 'search-results' ? 'block' : 'none' }}><SearchResults searchedProfessor={selectedProfessor} user={user} /></div>
+      <div style={{ display: currentPage === 'coursepicker' ? 'block' : 'none'}}><CoursePickerPage /> </div>
+      <div style={{ display: currentPage === 'schedule' ? 'block' : 'none'}}>
+        <ScheduleBuilder user={user} />
+      </div>
+
     </>
   )
 }

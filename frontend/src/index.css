@@ -26,3 +26,19 @@ body {
     image-rendering: pixelated;
 }
 
+/* Sprite sheet animation for map legs (6 frames, 128x128 each, vertical strip) */
+.map-sprite {
+    width: 384px;   /* 3x scale of 128 */
+    height: 384px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 384px 2304px; /* (128*3) x (128*3*6 frames) */
+    image-rendering: pixelated;
+    animation: map-legs-walk 2.6s steps(6) infinite; /* slightly slower */
+}
+
+@keyframes map-legs-walk {
+    from { background-position: 0 0; }
+    to   { background-position: 0 -2304px; } /* -(scaledFrameHeight * frames) */
+}
+

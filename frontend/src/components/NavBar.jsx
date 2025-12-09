@@ -36,7 +36,7 @@ function Navbar({ onNavigate, onLogout }) {
 
         <li>
           <button 
-            onClick={() => onNavigate('contact')}
+            onClick={() => onNavigate('schedule')}
             className="hover:text-[rgb(188,138,82)] transition-colors"
           >
             Schedule Builder
