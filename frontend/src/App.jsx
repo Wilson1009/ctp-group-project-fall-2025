@@ -12,6 +12,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState('home')
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [selectedProfessor, setSelectedProfessor] = useState(null)
 
   useEffect(() => {
     const unsubscribe = subscribeToAuthChanges((firebaseUser) => {
@@ -55,6 +56,11 @@ function App() {
     setCurrentPage('home')
   }
 
+  const handleProfessorSelect = (professorName) => {
+    setSelectedProfessor(professorName)
+    setCurrentPage('search-results')
+  }
+
   if (!user) {
     return <LoginPage onAuthSuccess={handleAuthSuccess} />
   }
@@ -65,9 +71,9 @@ function App() {
     <>
       <NavBar onNavigate={handleNavigate} onLogout={handleLogout}/>
 
-      <div style={{ display: currentPage === 'home' ? 'block' : 'none' }}><Home/></div>
+      <div style={{ display: currentPage === 'home' ? 'block' : 'none' }}><Home onProfessorSelect={handleProfessorSelect}/></div>
       <div style={{ display: currentPage === 'progress' ? 'block' : 'none' }}><Progress user={user}/></div>
-      <div style={{ display: currentPage === 'search-results' ? 'block' : 'none' }}><SearchResults /></div>
+      <div style={{ display: currentPage === 'search-results' ? 'block' : 'none' }}><SearchResults searchedProfessor={selectedProfessor} user={user} /></div>
 
     </>
   )

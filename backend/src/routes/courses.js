@@ -5,6 +5,20 @@ const { db } = require('../db/db')
 const { courses, professorRating } = require('../db/schema')
 const { eq, sql } = require('drizzle-orm')
 
+// Get all instructors - must be BEFORE the generic '/' route
+router.get('/instructors', async (req, res) => {
+    try {
+        const instructors = await db.select({ instructor: professorRating.instructor })
+            .from(professorRating)
+            .orderBy(professorRating.instructor);
+        
+        res.json(instructors.map(row => row.instructor));
+    } catch (err) {
+        console.error('GET /api/courses/instructors error:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
 router.get('/', async (req, res) => {
     try {
         const { title, instructor, term } = req.query;

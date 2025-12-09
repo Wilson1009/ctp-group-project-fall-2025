@@ -28,6 +28,7 @@ const courses = [
   {id:'MATH_143', name:'MATH 143- Calculus 3', type:'math'},
   {id:'MATH_241', name:'MATH 241- Prob & Stat', type:'math'},
   { id: 'MATH_120', name: 'MATH 120- Discrete Math',  type: 'math' },
+  {id:'MATH_231', name:'MATH 231- Linear Algebra', type:'math'},
 
 ];
 const links= [
@@ -66,6 +67,8 @@ const links= [
   { source: 'MATH_152', target: 'MATH_241' },
   { source: 'MATH_120', target: 'CS_211' },
   { source: 'MATH_120', target: 'CS_212' },
+  { source: 'MATH_141', target: 'MATH_231' },
+  { source: 'MATH_151', target: 'MATH_231' },
 ];
 
 const AnimatedItem = ({ children, delay = 0, index, onMouseEnter, onClick }) => {
@@ -187,7 +190,10 @@ function Progress({ user }) {
   // Helper to check if all prerequisites for a course are met
   const arePrerequisitesMet = (targetId, completed) => {
     const prerequisites = links.filter(l => getId(l.target) === targetId).map(l => getId(l.source));
+    if (targetId === 'CS_211') return completed.has('CS_111')
+    if (targetId === 'CS_212') return completed.has('CS_111')
     if (targetId === 'CS_220') return completed.has('CS_111') && (completed.has('MATH_141') || completed.has('MATH_151'))
+    if (targetId === 'MATH_231') return completed.has('MATH_141') || completed.has('MATH_151')
     if (targetId === 'CS_313') return completed.has('CS_211') && completed.has('CS_212');
     if (targetId === 'CS_316') return completed.has('CS_313') && completed.has('CS_320') && completed.has('CS_240');
     if (targetId === 'CS_340') return completed.has('CS_313') && completed.has('CS_240');
