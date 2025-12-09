@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
         const { instructor } = req.query
 
         if(!instructor){
-            res.status(400).json({ error: "Mssing instructor, instructor required" })
+            res.status(400).json({ error: "Missing instructor, instructor required" })
         }
 
         const allReviews = await db.select()

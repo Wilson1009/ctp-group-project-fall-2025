@@ -23,6 +23,12 @@ export const fetchInstructors = async () => {
     return response.json()
 }
 
+export const fetchCourseTitles = async () => {
+    const response = await fetch(`${API_BASE}/api/courses/titles`)
+    if (!response.ok) throw new Error('Failed to fetch course titles')
+    return response.json()
+}
+
 // Reviews
 
 export const fetchReviews = async (instructor) => {

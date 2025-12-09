@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import SearchResults from './components/SearchResults/SearchResults.jsx'
 import { subscribeToAuthChanges, logoutUser } from './firebase'
 import { getUserData } from './api/api'
+import CoursePickerPage from './components/CoursePicker/CoursePickerPage.jsx'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -74,6 +75,7 @@ function App() {
       <div style={{ display: currentPage === 'home' ? 'block' : 'none' }}><Home onProfessorSelect={handleProfessorSelect}/></div>
       <div style={{ display: currentPage === 'progress' ? 'block' : 'none' }}><Progress user={user}/></div>
       <div style={{ display: currentPage === 'search-results' ? 'block' : 'none' }}><SearchResults searchedProfessor={selectedProfessor} user={user} /></div>
+      <div style={{ display: currentPage === 'coursepicker' ? 'block' : 'none'}}><CoursePickerPage /> </div>
 
     </>
   )

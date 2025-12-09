@@ -369,10 +369,22 @@ function Progress({ user }) {
       // Re-evaluate ALL unlocked courses to see if they still have prerequisites met
       const newUnlocked = new Set(unlockedCourses);
       newUnlocked.forEach(unlockedId => {
+        // Special handling: Keep both MATH_141 and MATH_151 unlocked if MATH_122 is completed
+        if ((unlockedId === 'MATH_141' || unlockedId === 'MATH_151') && newCompleted.has('MATH_122')) {
+          return; // Don't remove these
+        }
         if (!arePrerequisitesMet(unlockedId, newCompleted)) {
           newUnlocked.delete(unlockedId);
         }
       });
+      
+      // Special handling: When unchecking MATH_141 or MATH_151, re-unlock the alternative
+      if (courseId === 'MATH_141' && newCompleted.has('MATH_122')) {
+        newUnlocked.add('MATH_151');
+      } else if (courseId === 'MATH_151' && newCompleted.has('MATH_122')) {
+        newUnlocked.add('MATH_141');
+      }
+      
       setUnlockedCourses(newUnlocked);
 
       // Re-evaluate special unlock conditions

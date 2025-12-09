@@ -5,7 +5,7 @@ const { db } = require('../db/db')
 const { courses, professorRating } = require('../db/schema')
 const { eq, sql } = require('drizzle-orm')
 
-// Get all instructors - must be BEFORE the generic '/' route
+// Get all instructors - for unique instructor dropdown on homepage
 router.get('/instructors', async (req, res) => {
     try {
         const instructors = await db.select({ instructor: professorRating.instructor })
@@ -19,6 +19,21 @@ router.get('/instructors', async (req, res) => {
     }
 });
 
+// Get all unique course titles, first part of course picker
+router.get('/titles', async (req, res) => {
+    try {
+        const titles = await db.selectDistinct({ courseTitle: courses.courseTitle })
+            .from(courses)
+            .orderBy(courses.courseTitle);
+        
+        res.json(titles.map(row => row.courseTitle));
+    } catch (err) {
+        console.error('GET /api/courses/titles error:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Get courses for more specific use cases, term for schedule builder, instructor for search, title for course picker
 router.get('/', async (req, res) => {
     try {
         const { title, instructor, term } = req.query;
